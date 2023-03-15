@@ -13,6 +13,7 @@ class Program
         Console.WriteLine(msg);
     }
 }
+
 class Solution
 {
     public string GetResult()
