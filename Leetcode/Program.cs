@@ -1,39 +1,19 @@
-﻿using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Collections;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
-using System.Text;
-using System;
-
-
-
-class Result
-{
-}
+﻿using System.Collections.Generic;
 
 class Solution
 {
-    public static void Main(string[] args)
+    public int[] TwoSum(int[] nums, int target)
     {
-        //TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+        var dict = new Dictionary<int, int>();
+        for (int i = 0; i < nums.Length; i++)
+        {
+            var sub = target - nums[i];
+            if (dict.TryGetValue(sub, out var index))
+                return new int[] { i, index };
+            
+            dict[nums[i]] = i;
+        }
 
-        string newName = Console.ReadLine();
-
-        string oldName = Console.ReadLine();
-
-        //int result = Result.MinJumps(newName, oldName);
-
-        //textWriter.WriteLine(result);
-        //
-        //textWriter.Flush();
-        //textWriter.Close();
-        Console.WriteLine(result);
+        return null;
     }
 }
