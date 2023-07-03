@@ -1,23 +1,28 @@
 ﻿using System;
 
-class Program
+namespace Leetcode
 {
-    public static void Main()
+    class Program
     {
-        Solution s = new Solution();
-        Print(s.GetResult());
+        public static void Main()
+        {
+            var s = new Solution();
+            Print(s.GetResult());
+        }
+
+        private static void Print(string msg) =>
+            Console.WriteLine(msg);
     }
 
-    public static void Print(string msg)
+    internal partial class Solution
     {
-        Console.WriteLine(msg);
+        public string GetResult()
+        {
+            return .ToString();
+        }
     }
-}
 
-class Solution
-{
-    public string GetResult()
+    internal partial class Solution
     {
-        return .ToString();
     }
 }
