@@ -1,23 +1,60 @@
 ﻿using System;
+using System.Collections.Generic;
 
-class Program
+namespace Leetcode
 {
-    public static void Main()
+    class Program
     {
-        Solution s = new Solution();
-        Print(s.GetResult());
+        public static void Main()
+        {
+            Solution s = new Solution();
+            Print(s.GetResult());
+        }
+
+        public static void Print(string msg)
+        {
+            Console.WriteLine(msg);
+        }
     }
 
-    public static void Print(string msg)
+    internal partial class Solution
     {
-        Console.WriteLine(msg);
+        public string GetResult()
+        {
+            return RomanToInt("LVIII").ToString();
+        }
     }
-}
 
-class Solution
-{
-    public string GetResult()
+    internal partial class Solution
     {
-        return .ToString();
+        public int RomanToInt(string s)
+        {
+            Dictionary<char, int> romanToIntChars = new Dictionary<char, int>()
+            {
+                { 'I', 1 },
+                { 'V', 5 },
+                { 'X', 10 },
+                { 'L', 50 },
+                { 'C', 100 },
+                { 'D', 500 },
+                { 'M', 1000 },
+            };
+            
+            var stack = new Stack<char>();
+            var lastChar = 'I';
+            var result = 0;
+
+            foreach (var c in s)
+                stack.Push(c);
+
+            while (stack.TryPop(out var c))
+            {
+                var mult = romanToIntChars[c] < romanToIntChars[lastChar] ? -1 : 1;
+                result += romanToIntChars[c] * mult;
+                lastChar = c;
+            }
+
+            return result;
+        }
     }
 }
