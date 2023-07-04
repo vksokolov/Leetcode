@@ -18,7 +18,7 @@ namespace Leetcode
     {
         public string GetResult()
         {
-            return .ToString();
+            return .ToPrettyString();
         }
     }
 
