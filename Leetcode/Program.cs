@@ -31,11 +31,11 @@ namespace Leetcode
     {
         public bool HasPathSum(TreeNode root, int targetSum)
         {
-            if (ReferenceEquals(root, null)) return false;
+            if (root == null) return false;
             if (ReferenceEquals(root.left, root.right)) return targetSum == root.val;
 
             return
-                HasPathSum(root.left, targetSum -= root.val) || 
+                HasPathSum(root.left, targetSum - root.val) || 
                 HasPathSum(root.right, targetSum - root.val);
         }
     }
