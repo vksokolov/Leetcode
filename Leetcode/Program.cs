@@ -18,11 +18,25 @@ namespace Leetcode
     {
         public string GetResult()
         {
-            return .ToPrettyString();
+            //var root = 0;
+            //var targetSum = 0;
+
+            var root = new TreeNode(1, null, new TreeNode(2));
+            var targetSum = 1;
+            return HasPathSum(root, targetSum).ToPrettyString();
         }
     }
 
     internal partial class Solution
     {
+        public bool HasPathSum(TreeNode root, int targetSum)
+        {
+            if (ReferenceEquals(root, null)) return false;
+            if (ReferenceEquals(root.left, root.right)) return targetSum == root.val;
+
+            return
+                HasPathSum(root.left, targetSum -= root.val) || 
+                HasPathSum(root.right, targetSum - root.val);
+        }
     }
 }
