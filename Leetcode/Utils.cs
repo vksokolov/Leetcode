@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -18,19 +19,43 @@ public static class Utils
             if (index != 0)
                 Sb.Append(", ");
 
-            Sb.Append(n);
+            Sb.Append(n.ToPrettyString());
         }
 
         Sb.Append(']');
         return Sb.ToString();
     }
-
+    
     public static string ToPrettyString<T>(this IEnumerable<T> list)
     {
-        var arr = list.ToArray();
-        return arr.ToPrettyString();
+        if (list == null)
+            return "null";
+
+        var stringBuilder = new StringBuilder("[");
+        var enumerable = list as T[] ?? list.ToArray();
+        foreach (var item in enumerable)
+        {
+            if (item is IEnumerable subList)
+                stringBuilder.Append(subList.Cast<object>().ToPrettyString());
+            else
+                stringBuilder.Append(item);
+
+            stringBuilder.Append(',');
+        }
+
+        // Remove trailing comma
+        if (enumerable.Any())
+            stringBuilder.Length--;
+
+        stringBuilder.Append(']');
+        return stringBuilder.ToString();
     }
 
     public static string ToPrettyString<T>(this T i)
-        => i.ToString();
+    {
+        if (i is IEnumerable<object> subList)
+            return subList.ToPrettyString();
+        
+        return i.ToString();
+    }
 }
