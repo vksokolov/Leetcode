@@ -22,7 +22,9 @@ namespace Leetcode
 
         public string GetResult()
         {
-            var func = () => GetRow(4);
+            //var prices = new int[] { 7, 1, 5, 3, 6, 4 };
+            var prices = new int[] { 1,2 };
+            var func = () => MaxProfit(prices);
             if (Benchmark)
             {
                 int iterations = 9999999;
@@ -42,5 +44,20 @@ namespace Leetcode
 
     internal partial class Solution
     {
+        public int MaxProfit(int[] prices)
+        {
+            var min = int.MaxValue;
+            var maxProfit = 0;
+            for (var i = 0; i < prices.Length; i++)
+            {
+                Min(ref min, prices[i]);
+                Max(ref maxProfit, prices[i] - min);
+            }
+
+            return maxProfit;
+
+            void Max(ref int a, int b) => a = a > b ? a : b;
+            void Min(ref int a, int b) => a = a < b ? a : b;
+        }
     }
 }
