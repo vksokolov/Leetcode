@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Leetcode
 {
@@ -19,27 +20,27 @@ namespace Leetcode
     {
         public string GetResult()
         {
-            return Generate(5).ToPrettyString();
+            var func = () => GetRow(4);
+
+            return func().ToPrettyString();
         }
     }
 
     internal partial class Solution
     {
-        public IList<int> Generate(int rowIndex)
+        public IList<int> GetRow(int rowIndex)
         {
-            var curList = new List<int>(1){1};
-            var prevList = curList;
-            for (var i = 1; i <= rowIndex; i++)
+            var row = new int[++rowIndex];
+            row[0] = 1;
+            row[^1] = 1;
+            for (var i = 1; i < rowIndex; i++)
             {
-                curList = new List<int>(i+1){1};
-                
-                for (var j = 0; j < i-1; j++) curList.Add(prevList[j] + prevList[j + 1]);
-                
-                curList.Add(1);
-                prevList = curList;
+                row[i] = 1;
+                for (var j = i - 1; j > 0; j--) 
+                    row[j] += row[j - 1];
             }
 
-            return curList;
+            return row;
         }
     }
 }
