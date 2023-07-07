@@ -25,19 +25,13 @@ namespace Leetcode
 
     internal partial class Solution
     {
-        public IList<IList<int>> Generate(int numRows)
+        public IList<int> Generate(int rowIndex)
         {
-            var result = new List<IList<int>>(numRows)
-            {
-                new List<int>(1){1}
-            };
-            
-            List<int> curList;
-            List<int> prevList = null;
-            for (var i = 1; i < numRows; i++)
+            var curList = new List<int>(1){1};
+            var prevList = curList;
+            for (var i = 1; i <= rowIndex; i++)
             {
                 curList = new List<int>(i+1){1};
-                result.Add(curList);
                 
                 for (var j = 0; j < i-1; j++) curList.Add(prevList[j] + prevList[j + 1]);
                 
@@ -45,7 +39,7 @@ namespace Leetcode
                 prevList = curList;
             }
 
-            return result;
+            return curList;
         }
     }
 }
