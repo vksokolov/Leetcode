@@ -26,13 +26,13 @@ public static class Utils
         return Sb.ToString();
     }
     
-    public static string ToPrettyString<T>(this IEnumerable<T> list)
+    public static string ToPrettyString(this IEnumerable list)
     {
         if (list == null)
             return "null";
 
         var stringBuilder = new StringBuilder("[");
-        var enumerable = list as T[] ?? list.ToArray();
+        var enumerable = list as object[] ?? list.Cast<object>().ToArray();
         foreach (var item in enumerable)
         {
             if (item is IEnumerable subList)
@@ -41,11 +41,12 @@ public static class Utils
                 stringBuilder.Append(item);
 
             stringBuilder.Append(',');
+            stringBuilder.Append(' ');
         }
 
         // Remove trailing comma
         if (enumerable.Any())
-            stringBuilder.Length--;
+            stringBuilder.Length-=2;
 
         stringBuilder.Append(']');
         return stringBuilder.ToString();
@@ -53,7 +54,7 @@ public static class Utils
 
     public static string ToPrettyString<T>(this T i)
     {
-        if (i is IEnumerable<object> subList)
+        if (i is IEnumerable subList)
             return subList.ToPrettyString();
         
         return i.ToString();
