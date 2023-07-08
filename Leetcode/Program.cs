@@ -42,5 +42,23 @@ namespace Leetcode
 
     internal partial class Solution
     {
+        public bool HasCycle(ListNode head)
+        {
+            if (head == null || head.next == null) return false;
+            
+            var fast = head;
+            var slow = head;
+
+            do
+            {
+                fast = fast.next;
+                if (ReferenceEquals(fast, null)) return false;
+                fast = fast.next;
+                if (ReferenceEquals(fast, null)) return false;
+                slow = slow?.next;
+            } while (fast != slow);
+
+            return true;
+        }
     }
 }
