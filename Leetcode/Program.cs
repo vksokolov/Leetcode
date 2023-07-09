@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text;
 
 namespace Leetcode
 {
@@ -22,7 +23,7 @@ namespace Leetcode
 
         public string GetResult()
         {
-            var func = () => GetRow(4);
+            var func = () => ConvertToTitle(701);
             if (Benchmark)
             {
                 int iterations = 9999999;
@@ -42,5 +43,16 @@ namespace Leetcode
 
     internal partial class Solution
     {
+        public string ConvertToTitle(int columnNumber)
+        {
+            var sb = new StringBuilder();
+            while (columnNumber > 0)
+            {
+                sb.Insert(0, (char)(--columnNumber % 26 + 'A'));
+                columnNumber /= 26;
+            }
+
+            return sb.ToString();
+        }
     }
 }
