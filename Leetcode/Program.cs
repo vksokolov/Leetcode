@@ -44,19 +44,11 @@ namespace Leetcode
     {
         public uint reverseBits(uint n)
         {
-            var left = (uint)1 << 31;
-            uint right = 1;
-            for (var i = 0; i < 32; i++)
-            {
-                n ^= (n & right) << (31 - 2 * i);
-                n ^= (n & left) >> (31 - 2 * i);
-                n ^= (n & right) << (31 - 2 * i);
-                
-                left >>= 1;
-                right <<= 1;
-            }
+            uint reversedBits = 0;
+            for (var i = 0; i < 32; i++) 
+                reversedBits |= ((n >> i) & 1) << (31 - i);
 
-            return n;
+            return reversedBits;
         }
     }
 }
