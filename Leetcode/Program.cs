@@ -22,7 +22,7 @@ namespace Leetcode
 
         public string GetResult()
         {
-            var func = () => GetRow(4);
+            var func = () => reverseBits(uint.MaxValue - 0b1010101);
             if (Benchmark)
             {
                 int iterations = 9999999;
@@ -42,5 +42,21 @@ namespace Leetcode
 
     internal partial class Solution
     {
+        public uint reverseBits(uint n)
+        {
+            var left = (uint)1 << 31;
+            uint right = 1;
+            for (var i = 0; i < 32; i++)
+            {
+                n ^= (n & right) << (31 - 2 * i);
+                n ^= (n & left) >> (31 - 2 * i);
+                n ^= (n & right) << (31 - 2 * i);
+                
+                left >>= 1;
+                right <<= 1;
+            }
+
+            return n;
+        }
     }
 }
