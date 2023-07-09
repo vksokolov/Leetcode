@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Leetcode
@@ -42,5 +43,18 @@ namespace Leetcode
 
     internal partial class Solution
     {
+        public bool ContainsNearbyDuplicate(int[] nums, int k)
+        {
+            var map = new Dictionary<int, int>(nums.Length);
+            for (var i = 0; i < nums.Length; i++)
+            {
+                if (!map.TryGetValue(nums[i], out var val) || (i-val) > k)
+                    map[nums[i]] = i;
+                else
+                    return true;
+            }
+
+            return false;
+        }
     }
 }
