@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 namespace Leetcode
 {
@@ -22,7 +25,7 @@ namespace Leetcode
 
         public string GetResult()
         {
-            var func = () => GetRow(4);
+            var func = () => IsHappy(19);
             if (Benchmark)
             {
                 int iterations = 9999999;
@@ -42,5 +45,28 @@ namespace Leetcode
 
     internal partial class Solution
     {
+        public bool IsHappy(int n)
+        {
+            long x = n;
+            var set = new HashSet<long>();
+            var digits = new List<int>(20);
+
+            while (!set.Contains(x))
+            {
+                digits.Clear();
+                set.Add(x);
+                Console.WriteLine(x);
+                while (x > 0)
+                {
+                    digits.Add((int)(x%10));
+                    x /= 10;
+                }
+
+                foreach (var digit in digits) 
+                    x += digit * digit;
+            }
+
+            return x == 1;
+        }
     }
 }
