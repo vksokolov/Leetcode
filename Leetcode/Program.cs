@@ -42,5 +42,33 @@ namespace Leetcode
 
     internal partial class Solution
     {
+        public ListNode RemoveElements(ListNode head, int val)
+        {
+            if (head == null) return null;
+            var node = head;
+
+            while (node.next != null)
+            {
+                if (node.next.val == val)
+                {
+                    if (node.next.next != null)
+                    {
+                        node.next.val = node.next.next.val;
+                        node.next.next = node.next.next.next;
+                    }
+                    else
+                        node.next = null;
+                }
+                else
+                {
+                    node = node.next;
+                }
+            }
+
+            if (head.val == val)
+                head = head.next;
+
+            return head;
+        }
     }
 }
