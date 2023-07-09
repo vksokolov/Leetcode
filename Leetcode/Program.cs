@@ -45,16 +45,16 @@ namespace Leetcode
     {
         public ListNode GetIntersectionNode(ListNode headA, ListNode headB)
         {
-            ListNode a = headA;
-            ListNode b = headB;
-            
-            while (a!=b)
+            var curA = headA;
+            var curB = headB;
+
+            while (curA != curB)
             {
-                a = a==null ? headB : a.next;
-                b = b==null ? headA : b.next;
+                curA = curA == null ? headB : curA.next;
+                curB = curB == null ? headA : curB.next;
             }
 
-            return a;
+            return curA;
         }
     }
 }
