@@ -22,7 +22,7 @@ namespace Leetcode
 
         public string GetResult()
         {
-            var func = () => GetRow(4);
+            var func = () => TitleToNumber("AB");
             if (Benchmark)
             {
                 int iterations = 9999999;
@@ -42,5 +42,16 @@ namespace Leetcode
 
     internal partial class Solution
     {
+        public int TitleToNumber(string columnTitle)
+        {
+            int result = 0;
+            for (var i = 0; i <= columnTitle.Length-1; i++)
+            {
+                result *= 26;
+                result += columnTitle[i] - '@';
+            }
+
+            return result;
+        }
     }
 }
