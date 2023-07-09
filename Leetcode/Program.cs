@@ -22,7 +22,8 @@ namespace Leetcode
 
         public string GetResult()
         {
-            var func = () => GetRow(4);
+            var list = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))));
+            var func = () => ReverseList(list);
             if (Benchmark)
             {
                 int iterations = 9999999;
@@ -42,5 +43,23 @@ namespace Leetcode
 
     internal partial class Solution
     {
+        public ListNode ReverseList(ListNode h)
+        {
+            return ReverseRecursively(h);
+            
+            ListNode ReverseRecursively(ListNode head)
+            {
+                if (head.next == null) return head;
+
+                var tail = head.next;
+                var newHead = ReverseRecursively(tail);
+
+                tail.next = head;
+                head.next = null;
+                
+
+                return newHead;
+            }
+        }
     }
 }
