@@ -23,7 +23,7 @@ namespace Leetcode
 
         public string GetResult()
         {
-            var func = () => IsIsomorphic("foo", "bar");
+            var func = () => IsIsomorphic("fos", "baa");
             if (Benchmark)
             {
                 int iterations = 9999999;
@@ -47,32 +47,21 @@ namespace Leetcode
         {
             if (s.Length != t.Length) return false;
             
-            var map = new Dictionary<char, int>();
+            var map = new Dictionary<int, int>(s.Length);
 
-            var a = GetValue(s);
-            var b = GetValue(t);
-
-            for (var i = 0; i < a.Count; i++)
+            for (var i = 0; i < s.Length; i++)
             {
-                if (a[i] != b[i]) return false;
+                if (!map.TryGetValue(s[i], out var cS) && !map.TryGetValue(-t[i], out var cT))
+                {
+                    if (cS != cT) return false;
+                    
+                    map[s[i]] = t[i];
+                    map[-t[i]] = s[i];
+                }
+                else if (t[i] != cS) return false;
             }
 
             return true;
-            
-            List<int> GetValue(string s)
-            {
-                var val = new List<int>(s.Length);
-                map.Clear();
-                foreach (var c in s)
-                {
-                    if (!map.TryGetValue(c, out var i)) 
-                        map.Add(c, map.Count);
-                    
-                    val.Add(map[c]);
-                }
-
-                return val;
-            }
         }
     }
 }
