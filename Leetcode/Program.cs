@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Leetcode
@@ -22,7 +23,7 @@ namespace Leetcode
 
         public string GetResult()
         {
-            var func = () => GetRow(4);
+            var func = () => IsIsomorphic("foo", "bar");
             if (Benchmark)
             {
                 int iterations = 9999999;
@@ -42,5 +43,36 @@ namespace Leetcode
 
     internal partial class Solution
     {
+        public bool IsIsomorphic(string s, string t)
+        {
+            if (s.Length != t.Length) return false;
+            
+            var map = new Dictionary<char, int>();
+
+            var a = GetValue(s);
+            var b = GetValue(t);
+
+            for (var i = 0; i < a.Count; i++)
+            {
+                if (a[i] != b[i]) return false;
+            }
+
+            return true;
+            
+            List<int> GetValue(string s)
+            {
+                var val = new List<int>(s.Length);
+                map.Clear();
+                foreach (var c in s)
+                {
+                    if (!map.TryGetValue(c, out var i)) 
+                        map.Add(c, map.Count);
+                    
+                    val.Add(map[c]);
+                }
+
+                return val;
+            }
+        }
     }
 }
