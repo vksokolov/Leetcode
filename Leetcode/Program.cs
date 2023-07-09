@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Leetcode
@@ -42,5 +43,6 @@ namespace Leetcode
 
     internal partial class Solution
     {
+        public bool ContainsDuplicate(int[] nums) => nums.Length != (new HashSet<int>(nums)).Count;
     }
 }
