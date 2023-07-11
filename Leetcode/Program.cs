@@ -42,5 +42,15 @@ namespace Leetcode
 
     internal partial class Solution
     {
+        public TreeNode InvertTree(TreeNode root)
+        {
+            if (root == null) return null;
+
+            (root.left, root.right) = (root.right, root.left);
+            InvertTree(root.left);
+            InvertTree(root.right);
+
+            return root;
+        }
     }
 }
