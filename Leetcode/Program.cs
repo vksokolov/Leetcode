@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Leetcode
@@ -42,5 +43,32 @@ namespace Leetcode
 
     internal partial class Solution
     {
+        public class MyStack
+        {
+
+            private Queue<int> _q;
+
+            public MyStack()
+            {
+                _q = new Queue<int>();
+            }
+
+            public void Push(int x)
+            {
+                _q.Enqueue(x);
+                
+                for (var i = 0; i < _q.Count-1; i++) 
+                    _q.Enqueue(_q.Dequeue());
+            }
+
+            public int Pop() => 
+                _q.Dequeue();
+
+            public int Top() => 
+                _q.Peek();
+
+            public bool Empty() => 
+                _q.Count == 0;
+        }
     }
 }
