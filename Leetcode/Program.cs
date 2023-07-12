@@ -22,7 +22,7 @@ namespace Leetcode
 
         public string GetResult()
         {
-            var func = () => GetRow(4);
+            var func = () => IsPowerOfTwo(int.MinValue);
             if (Benchmark)
             {
                 int iterations = 9999999;
@@ -42,43 +42,7 @@ namespace Leetcode
 
     internal partial class Solution
     {
-        public bool IsPowerOfTwo(int n)
-        {
-            return n switch
-            {
-                0b1 => true,
-                0b10 => true,
-                0b100 => true,
-                0b1000 => true,
-                0b10000 => true,
-                0b100000 => true,
-                0b1000000 => true,
-                0b10000000 => true,
-                0b100000000 => true,
-                0b1000000000 => true,
-                0b10000000000 => true,
-                0b100000000000 => true,
-                0b1000000000000 => true,
-                0b10000000000000 => true,
-                0b100000000000000 => true,
-                0b1000000000000000 => true,
-                0b10000000000000000 => true,
-                0b100000000000000000 => true,
-                0b1000000000000000000 => true,
-                0b10000000000000000000 => true,
-                0b100000000000000000000 => true,
-                0b1000000000000000000000 => true,
-                0b10000000000000000000000 => true,
-                0b100000000000000000000000 => true,
-                0b1000000000000000000000000 => true,
-                0b10000000000000000000000000 => true,
-                0b100000000000000000000000000 => true,
-                0b1000000000000000000000000000 => true,
-                0b10000000000000000000000000000 => true,
-                0b100000000000000000000000000000 => true,
-                0b1000000000000000000000000000000 => true,
-                _ => false
-            };
-        }
+        public bool IsPowerOfTwo(int n) => 
+            n > 0 && ((n - 1) & n) == 0;
     }
 }
