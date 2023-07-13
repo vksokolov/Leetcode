@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text;
 
 namespace Leetcode
 {
@@ -22,7 +23,12 @@ namespace Leetcode
 
         public string GetResult()
         {
-            var func = () => GetRow(4);
+            var arr = new int[]
+            {
+                4,3,2
+            };
+            
+            var func = () => MaxSatisfaction(arr);
             if (Benchmark)
             {
                 int iterations = 9999999;
@@ -42,5 +48,19 @@ namespace Leetcode
 
     internal partial class Solution
     {
+        public int MaxSatisfaction(int[] satisfaction) {
+            Array.Sort(satisfaction);
+
+            var totalSum = 0;
+            var uniqueSum = 0;
+            for (var i = 1; i < satisfaction.Length; i++)
+            {
+                uniqueSum += satisfaction[^i];
+                if (uniqueSum > 0) totalSum += uniqueSum;
+                else return totalSum;
+            }
+
+            return totalSum;
+        }
     }
 }
