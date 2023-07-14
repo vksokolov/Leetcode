@@ -42,4 +42,11 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public int[] GetConcatenation(int[] nums)
+    {
+        var result = new int[nums.Length * 2];
+        Array.Copy(nums, 0, result, 0, nums.Length);
+        Array.Copy(nums, 0, result, nums.Length, nums.Length);
+        return result;
+    }
 }
