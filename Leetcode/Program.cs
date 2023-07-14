@@ -43,17 +43,6 @@ internal partial class Solution
 
 internal partial class Solution
 {
-    public string DefangIPaddr(string address)
-    {
-        var sb = new StringBuilder();
-        foreach (var c in address)
-        {
-            if (c == '.')
-                sb.Append("[.]");
-            else
-                sb.Append(c);
-        }
-
-        return sb.ToString();
-    }
+    public string DefangIPaddr(string address) => 
+        address.Replace(".", "[.]");
 }
