@@ -22,7 +22,8 @@ namespace Leetcode
 
         public string GetResult()
         {
-            var func = () => GetRow(4);
+            var arr = new int[] { 0, 2, 1, 5, 3, 4 };
+            var func = () => BuildArray(arr);
             if (Benchmark)
             {
                 int iterations = 9999999;
@@ -42,5 +43,14 @@ namespace Leetcode
 
     internal partial class Solution
     {
+        public int[] BuildArray(int[] nums)
+        {
+            var ans = new int[nums.Length];
+
+            for (var i = 0; i < nums.Length; i++) 
+                ans[i] = nums[nums[i]];
+
+            return ans;
+        }
     }
 }
