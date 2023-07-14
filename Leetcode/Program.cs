@@ -42,4 +42,6 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public double[] ConvertTemperature(double celsius) => 
+        new[] { celsius + 273.15, celsius * 1.8 + 32 };
 }
