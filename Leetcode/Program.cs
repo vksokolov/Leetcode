@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text;
 
 namespace Leetcode
 {
@@ -22,7 +23,7 @@ namespace Leetcode
 
         public string GetResult()
         {
-            var func = () => GetRow(4);
+            var func = () => RecoverFromPreorder("1-401--349---90--88");
             if (Benchmark)
             {
                 int iterations = 9999999;
@@ -42,5 +43,35 @@ namespace Leetcode
 
     internal partial class Solution
     {
+        public TreeNode RecoverFromPreorder(string traversal)
+        {
+            var nestingLevel = 0;
+            var i = 0;
+            var head = new TreeNode();
+            TreeNode tmpNode;
+
+            FillNode(head);
+            return head;
+
+            void FillNode(TreeNode node, int indentLevel = 0)
+            {
+                while (i < traversal.Length && i != '-')
+                    node.val = node.val * 10 + (traversal[i++] - '0');
+
+                for (; i < traversal.Length; i++)
+                {
+                    var c = traversal[i];
+                    if (c == '-')
+                    {
+                        nestingLevel++;
+                    }
+                    else
+                    {
+                        tmpNode = new TreeNode();
+                        FillNode(tmpNode, nestingLevel);
+                    }
+                }
+            }
+        }
     }
 }
