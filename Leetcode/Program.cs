@@ -46,10 +46,7 @@ internal partial class Solution
     {
         var x = 0;
         foreach (var operation in operations)
-        {
-            if (operation[1] == '-') x--;
-            else x++;
-        }
+            x += ','-operation[1]; // '+' = 43, ',' = 44, '-' = 45 in ASCII
 
         return x;
     }
