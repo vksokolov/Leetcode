@@ -47,7 +47,7 @@ internal partial class Solution
         var x = 0;
         foreach (var operation in operations)
         {
-            if (operation[0] == '-' || operation[^1] == '-') x--;
+            if (operation[1] == '-') x--;
             else x++;
         }
 
