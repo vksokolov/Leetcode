@@ -22,7 +22,7 @@ internal partial class Solution
 
     public string GetResult()
     {
-        var func = () => GetRow(4);
+        var func = () => Shuffle(new [] {2,5,1,3,4,7}, 3);
         if (Benchmark)
         {
             int iterations = 9999999;
@@ -42,4 +42,15 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public int FinalValueAfterOperations(string[] operations)
+    {
+        var x = 0;
+        foreach (var operation in operations)
+        {
+            if (operation[0] == '-' || operation[^1] == '-') x--;
+            else x++;
+        }
+
+        return x;
+    }
 }
