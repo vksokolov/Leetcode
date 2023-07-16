@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Leetcode;
@@ -42,4 +43,20 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public class ParkingSystem
+    {
+        private Dictionary<int, int> _carTypeToSlots;
+        public ParkingSystem(int big, int medium, int small)
+        {
+            _carTypeToSlots = new Dictionary<int, int>()
+            {
+                { 1, big },
+                { 2, medium },
+                { 3, small }
+            };
+        }
+
+        public bool AddCar(int carType) => 
+            _carTypeToSlots[carType]-- > 0;
+    }
 }
