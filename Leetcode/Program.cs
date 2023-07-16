@@ -45,15 +45,10 @@ internal partial class Solution
 {
     public class ParkingSystem
     {
-        private Dictionary<int, int> _carTypeToSlots;
+        private int[] _carTypeToSlots;
         public ParkingSystem(int big, int medium, int small)
         {
-            _carTypeToSlots = new Dictionary<int, int>()
-            {
-                { 1, big },
-                { 2, medium },
-                { 3, small }
-            };
+            _carTypeToSlots = new int[] { 0, big, medium, small };
         }
 
         public bool AddCar(int carType) => 
