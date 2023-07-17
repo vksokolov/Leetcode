@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Leetcode;
@@ -42,4 +43,14 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public int NumJewelsInStones(string jewels, string stones)
+    {
+        var set = new HashSet<char>(jewels);
+        var totalJewels = 0;
+        foreach (var stone in stones)
+            if (set.Contains(stone))
+                totalJewels++;
+
+        return totalJewels;
+    }
 }
