@@ -42,4 +42,5 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public int TheMaximumAchievableX(int num, int t) => num + 2 * t;
 }
