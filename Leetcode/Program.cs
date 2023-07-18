@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Leetcode;
 
@@ -42,4 +44,14 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public IList<bool> KidsWithCandies(int[] candies, int extraCandies)
+    {
+        var result = new bool[candies.Length];
+        var max = candies.Max();
+
+        for (var i = 0; i < candies.Length; i++) 
+            result[i] = candies[i] + extraCandies >= max;
+
+        return result;
+    }
 }
