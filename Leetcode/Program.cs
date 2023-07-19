@@ -42,4 +42,5 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public int SmallestEvenMultiple(int n) => (n & 1) == 0 ? n : 2 * n;
 }
