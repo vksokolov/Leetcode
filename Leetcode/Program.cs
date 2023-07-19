@@ -42,4 +42,20 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public int MaximumWealth(int[][] accounts)
+    {
+        var max = 0;
+        foreach (var account in accounts)
+        {
+            var tmp = 0;
+            foreach (var money in account)
+            {
+                tmp += money;
+            }
+
+            if (tmp > max) max = tmp;
+        }
+
+        return max;
+    }
 }
