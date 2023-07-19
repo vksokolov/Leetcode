@@ -22,7 +22,8 @@ internal partial class Solution
 
     public string GetResult()
     {
-        var func = () => GetRow(4);
+        var nums = new int[] { 10, 4, 8, 3 };
+        var func = () => LeftRightDifference(nums);
         if (Benchmark)
         {
             int iterations = 9999999;
@@ -42,4 +43,29 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public int[] LeftRightDifference(int[] nums)
+    {
+        var leftSums = new int[nums.Length];
+        leftSums[0] = 0;
+        
+        var rightSums = new int[nums.Length];
+        rightSums[^1] = 0;
+        
+        var answer = new int[nums.Length];
+        int i;
+
+        for (i = 1; i < nums.Length; i++)
+        {
+            leftSums[i] = nums[i-1] + leftSums[i - 1];
+            rightSums[^(i + 1)] = rightSums[^i] + nums[^i];
+        }
+
+        for (i = 0; i < nums.Length; i++)
+        {
+            answer[i] = leftSums[i] - rightSums[i];
+            if (answer[i] < 0) answer[i] = -answer[i];
+        }
+
+        return answer;
+    }
 }
