@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text;
 
 namespace Leetcode;
 
@@ -22,7 +23,7 @@ internal partial class Solution
 
     public string GetResult()
     {
-        var func = () => GetRow(4);
+        var func = () => Interpret("G()(al)");
         if (Benchmark)
         {
             int iterations = 9999999;
@@ -42,4 +43,29 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public string Interpret(string command)
+    {
+        var sb = new StringBuilder();
+        for (var i = 0; i < command.Length;)
+        {
+            switch (command[i++])
+            {
+                case 'G':
+                    sb.Append('G');
+                    break;
+                case '(':
+                    if (command[i++] == ')')
+                        sb.Append('o');
+                    else
+                    {
+                        sb.Append("al");
+                        i += 2;
+                    }
+
+                    break;
+            }
+        }
+
+        return sb.ToString();
+    }
 }
