@@ -42,4 +42,20 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public int SubtractProductAndSum(int n)
+    {
+        var sum = 0;
+        var mul = 1;
+
+        while (n > 0)
+        {
+            var res = n % 10;
+            sum += res;
+            mul *= res;
+
+            n /= 10;
+        }
+
+        return mul - sum;
+    }
 }
