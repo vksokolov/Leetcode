@@ -42,4 +42,22 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public int MostWordsFound(string[] sentences)
+    {
+        var maxWords = 0;
+        var curWords;
+        foreach (var sentence in sentences)
+        {
+            curWords = 0;
+            foreach (var c in sentence)
+            {
+                if (c == ' ')
+                    curWords++;
+            }
+
+            if (maxWords < curWords) maxWords = curWords;
+        }
+
+        return maxWords;
+    }
 }
