@@ -42,4 +42,30 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public int RangeSumBST(TreeNode root, int low, int high)
+    {
+        bool leftCheck;
+        bool rightCheck;
+        
+        if (root == null) 
+            return 0;
+        
+        return GetSum(root);
+        
+        int GetSum(TreeNode node)
+        {
+            var sum = 0;
+
+            if (node == null)
+                return 0;
+
+            if (low <= node.val && node.val <= high)
+                sum += node.val;
+
+            sum += GetSum(node.left);
+            sum += GetSum(node.right);
+
+            return sum;
+        }
+    }
 }
