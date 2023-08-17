@@ -42,4 +42,13 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public int MinPartitions(string n)
+    {
+        var result = '0';
+        foreach (var c in n)
+            if (result < c)
+                result = c;
+
+        return result - '0';
+    }
 }
