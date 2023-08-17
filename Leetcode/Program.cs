@@ -42,4 +42,5 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public bool IsStrictlyPalindromic(int n) => false;
 }
