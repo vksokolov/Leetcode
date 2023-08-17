@@ -42,4 +42,33 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public ListNode InsertGreatestCommonDivisors(ListNode head)
+    {
+        if (head == null) return null;
+        
+        var node = head;
+        while (node.next != null)
+        {
+            var gdc = GetGreatestCommonDivisor(node.val, node.next.val);
+            var newNode = new ListNode(gdc);
+            newNode.next = node.next;
+            node.next = newNode;
+            node = newNode.next;
+        }
+
+        return head;
+        
+        int GetGreatestCommonDivisor(int a, int b)
+        {
+            while (a != 0 && b != 0)
+            {
+                if (a > b)
+                    a %= b;
+                else
+                    b %= a;
+            }
+
+            return a | b;
+        }
+    }
 }
