@@ -42,4 +42,29 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public ListNode MergeNodes(ListNode head)
+    {
+        if (head == null) return null;
+        
+        var node = head;
+        while (node.next != null)
+        {
+            if (node.next.val == 0)
+            {
+                if (node.next.next == null)
+                {
+                    node.next = null;
+                    return head;
+                }
+                node = node.next;
+            }
+            else
+            {
+                node.val += node.next.val;
+                node.next = node.next.next;
+            }
+        }
+
+        return head;
+    }
 }
