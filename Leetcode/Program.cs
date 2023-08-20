@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text;
 
 namespace Leetcode;
 
@@ -22,7 +23,7 @@ internal partial class Solution
 
     public string GetResult()
     {
-        var func = () => GetRow(4);
+        var func = () => LongestPalindrome("babad");
         if (Benchmark)
         {
             int iterations = 9999999;
@@ -42,4 +43,34 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public string LongestPalindrome(string s)
+    {
+        var maxLength = 0;
+        var palindromeStartIndex = 0;
+
+        for (var i = 0; i < s.Length;)
+        {
+            CheckFor(i, i);
+            CheckFor(i, ++i);
+        }
+
+        void CheckFor(int left, int right)
+        {
+            while (left >= 0 && right < s.Length && s[left] == s[right])
+            {
+                left--;
+                right++;
+            }
+            
+            left++;
+            
+            if (right - left > maxLength)
+            {
+                maxLength = right - left;
+                palindromeStartIndex = left;
+            }
+        }
+        
+        return s.AsSpan(palindromeStartIndex, maxLength).ToString();
+    }
 }
