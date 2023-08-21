@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text;
 
 namespace Leetcode;
 
@@ -22,7 +23,7 @@ internal partial class Solution
 
     public string GetResult()
     {
-        var func = () => GetRow(4);
+        var func = () => Reverse(-2147483412);
         if (Benchmark)
         {
             int iterations = 9999999;
@@ -42,4 +43,25 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public int Reverse(int x)
+    {
+        if (x is 0 or int.MinValue) 
+            return 0;
+        
+        var max = int.MaxValue / 10;
+        var result = 0;
+        var isPositive = x > 0;
+        if (!isPositive)
+            x = -x;
+        while (x > 0)
+        {
+            if (result > max)
+                return 0;
+
+            result = result * 10 + x % 10;
+            x /= 10;
+        }
+        
+        return isPositive ? result : -result;
+    }
 }
