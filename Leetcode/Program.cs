@@ -42,4 +42,24 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public int MaxArea(int[] height)
+    {
+        var left = 0;
+        var right = height.Length - 1;
+        var maxVolume = 0;
+        var width = right;
+
+        while (left < right)
+        {
+            var volume = Math.Min(height[left], height[right]) * width--;
+            if (maxVolume < volume) maxVolume = volume;
+            
+            if (height[left] < height[right])
+                left++;
+            else
+                right--;
+        }
+
+        return maxVolume;
+    }
 }
