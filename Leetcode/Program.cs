@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Leetcode;
 
@@ -48,38 +49,27 @@ internal partial class Solution
         if (string.IsNullOrEmpty(digits))
             return result;
 
-        var map = new Dictionary<char, char[]>()
+        var map = new string[]
         {
-            { '2', new[] { 'a', 'b', 'c' } },
-            { '3', new[] { 'd', 'e', 'f' } },
-            { '4', new[] { 'g', 'h', 'i' } },
-            { '5', new[] { 'j', 'k', 'l' } },
-            { '6', new[] { 'm', 'n', 'o' } },
-            { '7', new[] { 'p', 'r', 's', 'q' } },
-            { '8', new[] { 't', 'u', 'v' } },
-            { '9', new[] { 'w', 'x', 'y', 'z' } },
+            "abc",
+            "def",
+            "ghi",
+            "jkl",
+            "mno",
+            "prsq",
+            "tuv",
+            "wxyz",
         };
-
-        for (var index = 0; index < digits.Length; index++)
-        {
-            var digit = digits[index];
-            if (!map.TryGetValue(digit, out var symbols))
-                continue;
-
-            if (result.Count == 0)
-                foreach (var c in symbols)
-                    result.Add(c.ToString());
-            else
-            {
-                var initCount = result.Count;
-                foreach (var c in symbols)
-                    for (var i = 0; i < initCount; i++)
-                        result.Add(result[i] + c);
-            }
-        }
-
-        result.RemoveAll(x => x.Length != digits.Length);
         
-        return result;
+        var symbolSequences = digits.Select(d => map[d - '2']).ToArray();
+        var combinations = GetAllCombinations1(symbolSequences, digits.Length-1);
+        
+        return combinations.Select(x => new string(x.ToArray())).ToList();
+
+        IEnumerable<IEnumerable<char>> GetAllCombinations1(IReadOnlyList<IEnumerable<char>> sequences, int sequenceIndex) =>
+            sequenceIndex == 0
+                ? sequences[0].Select(c => new[] { c })
+                : GetAllCombinations1(sequences, sequenceIndex - 1)
+                    .SelectMany(_ => sequences[sequenceIndex], (chars, c) => chars.Append(c));
     }
 }
