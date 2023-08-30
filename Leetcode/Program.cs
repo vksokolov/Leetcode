@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text;
 
 namespace Leetcode;
 
@@ -22,7 +24,7 @@ internal partial class Solution
 
     public string GetResult()
     {
-        var func = () => GetRow(4);
+        var func = () => IntToRoman(1994);
         if (Benchmark)
         {
             int iterations = 9999999;
@@ -42,4 +44,21 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public string IntToRoman(int num)
+    {
+        var result = new StringBuilder();
+        var dec = new int[] { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+        var rom = new string[] { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X","IX", "V", "IV", "I" };
+        
+        for(var i=0;i<dec.Length; i++)
+        {
+            while(num >= dec[i])
+            {
+                num -= dec[i];
+                result.Append(rom[i]);
+            }
+        }
+        
+        return result.ToString();
+    }
 }
