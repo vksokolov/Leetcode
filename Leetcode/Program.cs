@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Leetcode;
 
@@ -22,7 +24,7 @@ internal partial class Solution
 
     public string GetResult()
     {
-        var func = () => GetRow(4);
+        var func = () => SwapPairs(new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4)))));
         if (Benchmark)
         {
             int iterations = 9999999;
@@ -42,4 +44,19 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public ListNode SwapPairs(ListNode head)
+    {
+        if (head == null)
+            return null;
+
+        if (head.next == null)
+            return head;
+        
+        var newHead = head.next;
+        var tail = SwapPairs(newHead.next);
+        newHead.next = head;
+        head.next = tail;
+
+        return newHead;
+    }
 }
