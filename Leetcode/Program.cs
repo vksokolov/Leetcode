@@ -22,7 +22,7 @@ internal partial class Solution
 
     public string GetResult()
     {
-        var func = () => GetRow(4);
+        var func = () => IsValidBST(TreeNode.Create(new int?[]{5,1,4,null,null,3,6}));
         if (Benchmark)
         {
             int iterations = 9999999;
@@ -42,4 +42,14 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public bool IsValidBST(TreeNode root)
+    {
+        return IsValid(root, long.MinValue, long.MaxValue);
+        
+        bool IsValid(TreeNode node, long min, long max) =>
+            min < node.val &&
+            node.val < max &&
+            (node.left == null || IsValid(node.left, min, node.val)) &&
+            (node.right == null || IsValid(node.right, node.val, max));
+    }
 }
