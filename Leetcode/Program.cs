@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Leetcode;
@@ -22,7 +23,7 @@ internal partial class Solution
 
     public string GetResult()
     {
-        var func = () => GetRow(4);
+        var func = () => NumTrees(3);
         if (Benchmark)
         {
             int iterations = 9999999;
@@ -42,4 +43,28 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    private static readonly int[] ans = new[] 
+    {
+        1,
+        2,
+        5,
+        14,
+        42,
+        132,
+        429,
+        1430,
+        4862,
+        16796,
+        58786,
+        208012,
+        742900,
+        2674440,
+        9694845,
+        35357670,
+        129644790,
+        477638700,
+        1767263190
+    };
+    
+    public int NumTrees(int n) => ans[n];
 }
