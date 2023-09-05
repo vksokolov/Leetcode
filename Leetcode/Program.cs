@@ -43,28 +43,16 @@ internal partial class Solution
 
 internal partial class Solution
 {
-    private static readonly int[] ans = new[] 
+    public int NumTrees(int n)
     {
-        1,
-        2,
-        5,
-        14,
-        42,
-        132,
-        429,
-        1430,
-        4862,
-        16796,
-        58786,
-        208012,
-        742900,
-        2674440,
-        9694845,
-        35357670,
-        129644790,
-        477638700,
-        1767263190
-    };
-    
-    public int NumTrees(int n) => ans[n];
+        var ans = new int[n + 1];
+        ans[0] = 1;
+        ans[1] = 1;
+
+        for (var i = 2; i <= n; ++i)
+        for (var j = 0; j < i; ++j)
+            ans[i] += ans[j] * ans[i - j - 1];
+
+        return ans[n];
+    }
 }
