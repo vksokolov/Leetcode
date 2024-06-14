@@ -22,7 +22,8 @@ internal partial class Solution
 
     public string GetResult()
     {
-        var func = () => GetRow(4);
+        var pref = new[]{5, 2, 0, 3, 1};
+        var func = () => FindArray(pref);
         if (Benchmark)
         {
             int iterations = 9999999;
@@ -42,4 +43,11 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public int[] FindArray(int[] pref) {
+        var result = new int[pref.Length];
+        result[0] = pref[0];
+        for (var i = 1; i < pref.Length; i++) 
+            result[i] = pref[i] ^ pref[i - 1];
+        return result;
+    }
 }
