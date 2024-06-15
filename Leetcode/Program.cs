@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Leetcode;
@@ -42,4 +43,21 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public IList<IList<int>> GroupThePeople(int[] groupSizes)
+    {
+        var result = new List<IList<int>>();
+        var dict = new Dictionary<int, List<int>>();
+
+        for (var i = 0; i < groupSizes.Length; i++)
+        {
+            dict.TryAdd(groupSizes[i], new List<int>());
+            dict[groupSizes[i]].Add(i);
+        }
+
+        foreach (var (size, group) in dict)
+            for (var i = 0; i < group.Count; i += size)
+                result.Add(group.GetRange(i, size));
+
+        return result;
+    }
 }
