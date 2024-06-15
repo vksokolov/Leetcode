@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Leetcode;
@@ -22,7 +23,8 @@ internal partial class Solution
 
     public string GetResult()
     {
-        var func = () => GetRow(4);
+        var list = ListNode.Create(new int?[] { 1, 2, 3, 4, 5 });
+        var func = () => RemoveNthFromEnd(list, 2);
         if (Benchmark)
         {
             int iterations = 9999999;
@@ -42,4 +44,26 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public ListNode RemoveNthFromEnd(ListNode head, int n)
+    {
+        var tmp = head;
+        var stack = new Stack<ListNode>();
+        ListNode newHead = null;
+        
+        while(tmp != null)
+        {
+            stack.Push(tmp);
+            tmp = tmp.next;
+        }
+
+        while (stack.TryPop(out var node))
+        {
+            if (--n == 0)
+                continue;
+
+            node.next = newHead;
+            newHead = node;
+        }
+        return newHead;
+    }
 }
