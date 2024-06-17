@@ -45,26 +45,16 @@ internal partial class Solution
 {
     public IList<IList<int>> FindMatrix(int[] nums) {
         var map = new Dictionary<int, int>();
-        var max = 0;
+        var result = new List<IList<int>>();
         foreach (var num in nums)
         {
-            map.TryAdd(num, 0);
-            map[num]++;
-            if (map[num] > max)
-                max = map[num];
-        }
-        
-        var result = new List<IList<int>>();
-        for (var i = 0; i < max; i++)
-        {
-            var row = new List<int>();
-            foreach (var (key, value) in map)
-            {
-                if (value > i)
-                    row.Add(key);
-            }
-            if (row.Count > 0)
-                result.Add(row);
+            if (!map.TryAdd(num, 1))
+                map[num]++;
+            
+            if (result.Count < map[num])
+                result.Add(new List<int>());
+
+            result[map[num] - 1].Add(num);
         }
 
         return result;
