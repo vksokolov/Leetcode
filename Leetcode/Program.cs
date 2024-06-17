@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Leetcode;
@@ -22,7 +23,7 @@ internal partial class Solution
 
     public string GetResult()
     {
-        var func = () => GetRow(4);
+        var func = () => FindMatrix(new[] {8,8,8,8,2,4,4,2,4});
         if (Benchmark)
         {
             int iterations = 9999999;
@@ -42,4 +43,30 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public IList<IList<int>> FindMatrix(int[] nums) {
+        var map = new Dictionary<int, int>();
+        var max = 0;
+        foreach (var num in nums)
+        {
+            map.TryAdd(num, 0);
+            map[num]++;
+            if (map[num] > max)
+                max = map[num];
+        }
+        
+        var result = new List<IList<int>>();
+        for (var i = 0; i < max; i++)
+        {
+            var row = new List<int>();
+            foreach (var (key, value) in map)
+            {
+                if (value > i)
+                    row.Add(key);
+            }
+            if (row.Count > 0)
+                result.Add(row);
+        }
+
+        return result;
+    }
 }
