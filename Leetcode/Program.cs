@@ -42,4 +42,21 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public int MinOperations(int[] nums, int k)
+    {
+        var totalXor = 0;
+        var result = 0;
+        foreach (var num in nums)
+            totalXor ^= num;
+
+        totalXor ^= k;
+        while (totalXor > 0)
+        {
+            if (totalXor >> 1 << 1 == totalXor)
+                result++;
+
+            totalXor >>= 1;
+        }
+        return result;
+    }
 }
