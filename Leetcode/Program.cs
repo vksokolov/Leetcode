@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Leetcode;
 
@@ -42,4 +44,21 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public int DeepestLeavesSum(TreeNode root)
+    {
+        var map = new Dictionary<int, List<int>>();
+        var maxLevel = 0;
+        return map[maxLevel].Sum();
+
+        void FillMap(TreeNode node, int level)
+        {
+            if (node == null) 
+                return;
+            maxLevel = Math.Max(maxLevel, level);
+            map.TryAdd(level, new List<int>());
+            map[level].Add(node.val);
+            FillMap(node.left, level + 1);
+            FillMap(node.right, level + 1);
+        }
+    }
 }
