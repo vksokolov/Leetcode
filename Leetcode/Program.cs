@@ -46,22 +46,23 @@ internal partial class Solution
         // got forward and backward
         
         var n = boxes.Length;
-        var turnsToMoveFromTheLeft = new int[n];
-        var turnsToMoveFromTheRight = new int[n];
+        var turnsToMoveFromTheLeft = 0;
+        var turnsToMoveFromTheRight = 0;
         var ballsOnTheLeft = 0;
         var ballsOnTheRight = 0;
+        var result = new int[n];
+        
         for (var i = 1; i < n; i++)
         {
             ballsOnTheLeft += boxes[i - 1] - '0';
-            turnsToMoveFromTheLeft[i] += turnsToMoveFromTheLeft[i-1] + ballsOnTheLeft;
+            turnsToMoveFromTheLeft += ballsOnTheLeft;
+            result[i] += turnsToMoveFromTheLeft;
             
             ballsOnTheRight += boxes[n - i] - '0';
-            turnsToMoveFromTheRight[n - i - 1] += turnsToMoveFromTheRight[n - i] + ballsOnTheRight;
+            turnsToMoveFromTheRight += ballsOnTheRight;
+            result[n - i - 1] += turnsToMoveFromTheRight;
         }
-        
-        for (var i = 0; i < n; i++)
-            turnsToMoveFromTheLeft[i] += turnsToMoveFromTheRight[i];
-        
-        return turnsToMoveFromTheLeft;
+
+        return result;
     }
 }
