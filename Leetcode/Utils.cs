@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -58,5 +59,27 @@ public static class Utils
             return subList.ToPrettyString();
         
         return i.ToString();
+    }
+
+    public static T[][] To2dArray<T>(this string s)
+    {
+        var rows = s.Split("],");
+        var result = new T[rows.Length][];
+
+        for (var i = 0; i < rows.Length; i++)
+        {
+            var row = rows[i].Trim();
+            row = row.Trim('[', ']');
+            var cols = row.Split(',');
+            result[i] = new T[cols.Length];
+
+            for (var j = 0; j < cols.Length; j++)
+            {
+                var col = cols[j].Trim();
+                result[i][j] = (T) Convert.ChangeType(col, typeof(T));
+            }
+        }
+
+        return result;
     }
 }
