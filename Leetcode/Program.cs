@@ -22,7 +22,7 @@ internal partial class Solution
 
     public string GetResult()
     {
-        var func = () => GetRow(4);
+        var func = () => NumberOfBeams(new []{"011001","000000","010100","001000"});
         if (Benchmark)
         {
             int iterations = 9999999;
@@ -42,4 +42,24 @@ internal partial class Solution
 
 internal partial class Solution
 {
+    public int NumberOfBeams(string[] bank)
+    {
+        var beams = 0;
+        var devicesInPrevRow = 0;
+        var devicesInCurRow = 0;
+        foreach (var row in bank)
+        {
+            foreach (var cell in row) 
+                devicesInCurRow += cell - '0';
+
+            if (devicesInCurRow == 0)
+                continue;
+            
+            beams += devicesInCurRow * devicesInPrevRow;
+            devicesInPrevRow = devicesInCurRow;
+            devicesInCurRow = 0;
+        }
+
+        return beams;
+    }
 }
