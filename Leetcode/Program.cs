@@ -47,14 +47,14 @@ internal partial class Solution
         var beams = 0;
         var devicesInPrevRow = 0;
         var devicesInCurRow = 0;
-        foreach (var row in bank)
+        for (var i = 0; i < bank.Length; i++)
         {
-            foreach (var cell in row) 
-                devicesInCurRow += cell - '0';
+            for (var j = 0; j < bank[i].Length; j++)
+                if (bank[i][j] == '1') devicesInCurRow++;
 
             if (devicesInCurRow == 0)
                 continue;
-            
+
             beams += devicesInCurRow * devicesInPrevRow;
             devicesInPrevRow = devicesInCurRow;
             devicesInCurRow = 0;
